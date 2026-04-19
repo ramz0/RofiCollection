@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+dir="$HOME/Pictures/Screenshots"
+ddir="$HOME/.config/rofi/config"
+timer=5
+
+# FA classic icons
+select=$(printf '\uf125')    # fa-crop
+window=$(printf '\uf2d2')    # fa-window-restore
+screen=$(printf '\uf108')    # fa-desktop
+delay=$(printf '\uf017')     # fa-clock-o
+
+filename="IMG_$(date +%Y%m%d_%H%M%S).png"
+filepath="$dir/$filename"
+
+[ ! -d "$dir" ] && mkdir -p "$dir"
+
+notify_saved() {
+    notify-send -a "Screenshot" "Guardado en $dir" -i "$filepath"
+}
+
+countdown() {
+    for sec in $(seq "$1" -1 1); do
+        notify-send -t 900 -a "Screenshot" "Capturando en ${sec}s..."
+    done
+}
+
+take_select() {
+    sleep 0.3
+    maim -u -f png -s -b 2 -c 0.35,0.55,0.85,0.25 -l \
+        | tee "$filepath" | xclip -selection clipboard -t image/png
+    notify_saved
+}
+
+take_window() {
+    sleep 0.3
+    maim -u -f png -i "$(xdotool getactivewindow)" \
+        | tee "$filepath" | xclip -selection clipboard -t image/png
+    notify_saved
+}
+
+take_screen() {
+    sleep 0.3
+    maim -u -f png \
+        | tee "$filepath" | xclip -selection clipboard -t image/png
+    notify_saved
+}
+
+take_delay() {
+    countdown "$timer"
+    sleep 1
+    maim -u -f png \
+        | tee "$filepath" | xclip -selection clipboard -t image/png
+    notify_saved
+}
+
+options="$select\n$window\n$screen\n$delay"
+
+chosen="$(echo -e "$options" | rofi \
+    -theme "$ddir/screenshot.rasi" \
+    -dmenu \
+    -mesg "$(printf '\uf017') ${timer}s" \
+    -hover-select \
+    -me-select-entry '' \
+    -me-accept-entry MousePrimary \
+    -selected-row 0)"
+
+case $chosen in
+    $select) take_select ;;
+    $window) take_window ;;
+    $screen) take_screen ;;
+    $delay)  take_delay  ;;
+esac

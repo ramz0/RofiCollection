@@ -1,0 +1,94 @@
+/*****----- Configuration -----*****/
+configuration {
+    show-icons:         false;
+    hover-select:       true;
+    me-accept-entry:    "MousePrimary";
+    me-select-entry:    "";
+    fixed-num-lines:    true;
+}
+
+/*****----- Colors -----*****/
+* {
+    background:     #1e2030;
+    background-alt: #181926;
+    foreground:     #cad3f5;
+    selected:       #eed49f;
+    border-col:     #363a4f;
+}
+
+/*****----- Main Window -----*****/
+window {
+    location:           east;
+    width:              76px;
+    x-offset:           -12px;
+    y-offset:           0px;
+    padding:            0px;
+    border:             1px solid;
+    border-radius:      14px;
+    border-color:       @border-col;
+    background-color:   @background;
+    cursor:             "default";
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    spacing:            0px;
+    padding:            4px;
+    background-color:   @background;
+    children:           [ "listview", "message" ];
+}
+
+/*****----- Message (uptime) -----*****/
+message {
+    padding:            6px 4px;
+    background-color:   @background-alt;
+    border-radius:      8px;
+}
+
+textbox {
+    horizontal-align:   0.5;
+    font:               "CaskaydiaCove Nerd Font 10";
+    background-color:   transparent;
+    text-color:         @foreground;
+}
+
+/*****----- Listview -----*****/
+listview {
+    spacing:            3px;
+    padding:            3px;
+    layout:             vertical;
+    columns:            1;
+    lines:              5;
+    scrollbar:          false;
+    fixed-height:       false;
+    background-color:   transparent;
+}
+
+/*****----- Elements -----*****/
+element {
+    padding:            10px 14px;
+    border-radius:      10px;
+    background-color:   transparent;
+    text-color:         @foreground;
+    cursor:             pointer;
+}
+
+element-text {
+    font:               "CaskaydiaCove Nerd Font 20";
+    background-color:   transparent;
+    text-color:         inherit;
+    vertical-align:     0.5;
+    horizontal-align:   0.5;
+}
+
+element normal.normal,
+element alternate.normal {
+    background-color:   transparent;
+    text-color:         @foreground;
+}
+
+element selected.normal {
+    background-color:   @background-alt;
+    text-color:         @selected;
+    border-radius:      10px;
+}

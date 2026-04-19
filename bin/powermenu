@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+ddir="$HOME/.config/rofi/config"
+
+uptime=$(uptime -p | sed -e 's/up //g; s/ days\|day/d/g; s/ hours\|hour/h/g; s/ minutes\|minute/m/g; s/, /\n/g')
+
+# Font Awesome classic icons (rango F000-F2FF, estable en todos los NF)
+shutdown=$(printf '\uf011')    # fa-power-off
+reboot=$(printf '\uf021')      # fa-refresh
+lock=$(printf '\uf023')        # fa-lock
+suspend=$(printf '\uf186')     # fa-moon-o
+logout=$(printf '\uf08b')      # fa-sign-out
+
+rdialog() {
+	rofi -dmenu -i -no-fixed-num-lines \
+		-p "¿Seguro? (s/n): " \
+		-theme "$ddir/confirm.rasi"
+}
+
+options="$lock\n$suspend\n$logout\n$reboot\n$shutdown"
+
+chosen="$(echo -e "$options" | rofi \
+	-theme "$ddir/powermenu.rasi" \
+	-dmenu \
+	-mesg "$uptime" \
+	-hover-select \
+	-me-select-entry '' \
+	-me-accept-entry MousePrimary \
+	-selected-row 0)"
+
+case $chosen in
+	$shutdown)
+		ans=$(rdialog)
+		[[ $ans == "s" || $ans == "si" || $ans == "y" || $ans == "yes" ]] && systemctl poweroff
+		;;
+	$reboot)
+		ans=$(rdialog)
+		[[ $ans == "s" || $ans == "si" || $ans == "y" || $ans == "yes" ]] && systemctl reboot
+		;;
+	$lock)
+		sh "$HOME/.local/bin/lock"
+		;;
+	$suspend)
+		ans=$(rdialog)
+		if [[ $ans == "s" || $ans == "si" || $ans == "y" || $ans == "yes" ]]; then
+			mpc -q pause 2>/dev/null
+			amixer set Master mute 2>/dev/null
+			sh "$HOME/.local/bin/lock"
+			systemctl suspend
+		fi
+		;;
+	$logout)
+		ans=$(rdialog)
+		[[ $ans == "s" || $ans == "si" || $ans == "y" || $ans == "yes" ]] && bspc quit
+		;;
+esac

@@ -1,0 +1,94 @@
+/*****----- Configuration -----*****/
+configuration {
+    show-icons:         false;
+    hover-select:       true;
+    me-accept-entry:    "MousePrimary";
+    me-select-entry:    "";
+    fixed-num-lines:    true;
+}
+
+/*****----- Colors (Tokyo Night Storm) -----*****/
+* {
+    background:     #24283b;
+    background-alt: #292e42;
+    foreground:     #a9b1d6;
+    selected:       #7aa2f7;
+    border-col:     #414868;
+}
+
+/*****----- Main Window -----*****/
+window {
+    location:           east;
+    width:              76px;
+    x-offset:           -12px;
+    y-offset:           0px;
+    padding:            0px;
+    border:             1px solid;
+    border-radius:      14px;
+    border-color:       @border-col;
+    background-color:   @background;
+    cursor:             "default";
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    spacing:            0px;
+    padding:            4px;
+    background-color:   @background;
+    children:           [ "listview", "message" ];
+}
+
+/*****----- Message (timer) -----*****/
+message {
+    padding:            6px 4px;
+    background-color:   @background-alt;
+    border-radius:      8px;
+}
+
+textbox {
+    horizontal-align:   0.5;
+    font:               "CaskaydiaCove Nerd Font 10";
+    background-color:   transparent;
+    text-color:         @foreground;
+}
+
+/*****----- Listview -----*****/
+listview {
+    spacing:            3px;
+    padding:            3px;
+    layout:             vertical;
+    columns:            1;
+    lines:              4;
+    scrollbar:          false;
+    fixed-height:       false;
+    background-color:   transparent;
+}
+
+/*****----- Elements -----*****/
+element {
+    padding:            10px 14px;
+    border-radius:      10px;
+    background-color:   transparent;
+    text-color:         @foreground;
+    cursor:             pointer;
+}
+
+element-text {
+    font:               "CaskaydiaCove Nerd Font 16";
+    background-color:   transparent;
+    text-color:         inherit;
+    vertical-align:     0.5;
+    horizontal-align:   0.5;
+}
+
+element normal.normal,
+element alternate.normal {
+    background-color:   transparent;
+    text-color:         @foreground;
+}
+
+element selected.normal {
+    background-color:   @background-alt;
+    text-color:         @selected;
+    border-radius:      10px;
+}

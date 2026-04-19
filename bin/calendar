@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+ddir="$HOME/.config/rofi/config"
+tasks_file="$HOME/.local/share/rofi-calendar-tasks"
+
+DIFF=0
+TODAY=$(date '+%-d')
+CURRENT_MONTH=$(date '+%-m')
+CURRENT_YEAR=$(date '+%Y')
+
+prev=$(printf '\uf060')    # fa-arrow-left
+list=$(printf '\uf03a')    # fa-list
+next=$(printf '\uf061')    # fa-arrow-right
+
+get_calendar() {
+    if [ "$DIFF" -eq 0 ]; then
+        cal | sed "s/\b${TODAY}\b/<b><u><span color=\"#c0caf5\">${TODAY}<\/span><\/u><\/b>/"
+    else
+        local abs_diff="${DIFF#-}"
+        local sign="+"
+        [ "$DIFF" -lt 0 ] && sign="-"
+        local target
+        target=$(date -d "$(date +%Y-%m-01) ${sign}${abs_diff} month" +"%-m %Y")
+        cal $target
+    fi
+}
+
+show_main() {
+    local message
+    message=$(get_calendar)
+    local options="$prev\n$list\n$next"
+
+    chosen="$(echo -e "$options" | rofi \
+        -theme "$ddir/calendar.rasi" \
+        -dmenu \
+        -p "Calendar" \
+        -mesg "$message" \
+        -hover-select \
+        -me-select-entry '' \
+        -me-accept-entry MousePrimary \
+        -selected-row 1)"
+
+    case $chosen in
+        "$prev") DIFF=$((DIFF - 1)); show_main ;;
+        "$next") DIFF=$((DIFF + 1)); show_main ;;
+        "$list") show_tasks ;;
+        *)       exit 0 ;;
+    esac
+}
+
+show_tasks() {
+    local content
+    if [ -f "$tasks_file" ]; then
+        content=$(cat "$tasks_file")
+    else
+        content="Sin tareas.\n\nPara agregar, crea el archivo:\n$tasks_file"
+    fi
+
+    local back
+    back=$(printf '\uf060')
+
+    echo -e "$back" | rofi \
+        -theme "$ddir/calendar.rasi" \
+        -dmenu \
+        -p "Tareas" \
+        -mesg "$content" \
+        -hover-select \
+        -me-select-entry '' \
+        -me-accept-entry MousePrimary \
+        -selected-row 0 > /dev/null
+
+    show_main
+}
+
+show_main
