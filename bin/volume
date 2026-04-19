@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+#
+## Author   : mdfk@Elite <2022>
+## Github   : @mdfk15
+#
+####### Rofi Volume #######
+
+path=$(dirname "$0")
+source $path/base.sh
+
+icon_muted='\uf6a9'
+icon_mic_on='\uf130'
+icon_mic_off='\uf131'
+icon_vol_low='\uf027'
+icon_vol_med='\uf028'
+icon_vol_high='\uf029'
+
+options() {
+    percentage="$(amixer sget Master | grep Left: | awk -F '[][]' '{ print $2 }')"
+    state="$(amixer sget Master | grep Left: | awk -F '[][]' '{ print $4 }')"
+    mic_state="$(amixer get Capture | grep Left: | awk -F '[][]' '{ print $4 }')"
+
+    active=''
+    urgent=''
+
+    if [[ "$state" == "off" ]]; then
+        icon="$icon_muted"
+        [ -n "$active" ] && active+=",0" || active="-a 0"
+    else
+        pct_num=${percentage%\%}
+        if [[ $pct_num -le 30 ]]; then
+            icon="$icon_vol_low"
+            [ -n "$active" ] && active+=",0" || active="-a 0"
+        elif [[ $pct_num -lt 70 ]]; then
+            icon="$icon_vol_med"
+        else
+            icon="$icon_vol_high"
+            [ -n "$active" ] && active+=",0" || active="-a 0"
+        fi
+    fi
+
+    if [[ "$mic_state" == "off" ]]; then
+        mic="$icon_mic_off"
+    else
+        mic="$icon_mic_on"
+        [ -n "$active" ] && active+=",2" || active="-a 2"
+    fi
+
+    if [[ "$state" == "off" ]]; then
+        [ -n "$active" ] && active+=",0" || active="-a 0"
+    fi
+
+    options="$icon\n$mic\n$icon_muted"
+    [ -n "$percentage" ] && title="$percentage" || title='Volume'
+}
+
+handle_option() {
+    if [[ "$1" == "$icon_muted" ]]; then
+        amixer set Master toggle >/dev/null
+    elif [[ "$1" == "$mic" ]]; then
+        amixer set Capture toggle >/dev/null
+    else
+        amixer set Master 70% >/dev/null
+    fi
+}
+
+check_case() {
+    case "$chosen" in
+        "$icon_muted")
+            handle_option "$icon_muted";;
+        "$mic")
+            handle_option "$mic";;
+        "$icon")
+            notify-send -a "Volume" "Volume: 70%" -h 'int:value:70'
+            amixer set Master 70% >/dev/null;;
+    esac
+    main_menu
+}
+
+title='Volume'
+icon='\uf028'
+
+main_menu
