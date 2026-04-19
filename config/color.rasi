@@ -1,0 +1,13 @@
+* {
+    background:     #1e1e2ecc;
+    background-alt: #31324488;
+    foreground:     #cdd6f4cc;
+    foreground-alt: #a6adc8dd;
+    selected:       #9ece6a;
+    selected-alt:   #89b4fa22;
+    grey-alt:       #585b70;
+    element:        #31324488;
+    red:            #f38ba8;
+    green:          #a6e3a1;
+    yellow:         #f9e2af;
+}
