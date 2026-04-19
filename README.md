@@ -1,16 +1,9 @@
 # Rofi
 
+<img src="preview/rofi.gif" alt="Rofi Preview" width="100%">
+
 <div align="center">
   <p>Colección de scripts Rofi para launcher, menús y applets</p>
-  
-  <img src="preview/rofi.gif" alt="Preview" width="400">
-  
-  <a href="https://github.com/ramz0/rofi/stargazers">
-    <img src="https://img.shields.io/github/stars/ramz0/rofi?colorA=363a4f&colorB=b7bdf8&style=for-the-badge">
-  </a>
-  <a href="https://github.com/ramz0/rofi/issues">
-    <img src="https://img.shields.io/github/issues/ramz0/rofi?colorA=363a4f&colorB=f5a97f&style=for-the-badge">
-  </a>
 </div>
 
 ---
