@@ -8,34 +8,45 @@
 path=$(dirname "$0")
 source $path/base.sh
 
-icon_muted='\uf6a9'
+icon_vol='\uf028'
 icon_mic_on='\uf130'
 icon_mic_off='\uf131'
-icon_vol_low='\uf027'
-icon_vol_med='\uf028'
-icon_vol_high='\uf029'
+icon_muted='\uf6a9'
+icon_plus='\uf0fe'
+icon_minus='\uf146'
 
-options() {
+get_volume_state() {
     percentage="$(amixer sget Master | grep Left: | awk -F '[][]' '{ print $2 }')"
     state="$(amixer sget Master | grep Left: | awk -F '[][]' '{ print $4 }')"
     mic_state="$(amixer get Capture | grep Left: | awk -F '[][]' '{ print $4 }')"
+    pct_num=${percentage%\%}
+}
+
+draw_bar() {
+    local pct=$1
+    local filled=$((pct / 5))
+    local empty=$((20 - filled))
+    local bar=$(printf '%*s' "$filled" | tr ' ' '▓')
+    bar+=$(printf '%*s' "$empty" | tr ' ' '░')
+    echo "$bar"
+}
+
+options() {
+    get_volume_state
 
     active=''
     urgent=''
 
     if [[ "$state" == "off" ]]; then
         icon="$icon_muted"
-        [ -n "$active" ] && active+=",0" || active="-a 0"
+        [ -n "$urgent" ] && urgent+=",0" || urgent="-u 0"
     else
-        pct_num=${percentage%\%}
         if [[ $pct_num -le 30 ]]; then
-            icon="$icon_vol_low"
-            [ -n "$active" ] && active+=",0" || active="-a 0"
+            icon='\uf027'
         elif [[ $pct_num -lt 70 ]]; then
-            icon="$icon_vol_med"
+            icon='\uf028'
         else
-            icon="$icon_vol_high"
-            [ -n "$active" ] && active+=",0" || active="-a 0"
+            icon='\uf029'
         fi
     fi
 
@@ -50,29 +61,47 @@ options() {
         [ -n "$active" ] && active+=",0" || active="-a 0"
     fi
 
-    options="$icon\n$mic\n$icon_muted"
+    bar=$(draw_bar "$pct_num")
+    message="Vol: [$bar] $percentage"
+
+    options="$icon_plus\n$icon\n$icon_minus\n$mic\n$icon_muted"
     [ -n "$percentage" ] && title="$percentage" || title='Volume'
 }
 
 handle_option() {
-    if [[ "$1" == "$icon_muted" ]]; then
-        amixer set Master toggle >/dev/null
-    elif [[ "$1" == "$mic" ]]; then
-        amixer set Capture toggle >/dev/null
-    else
-        amixer set Master 70% >/dev/null
-    fi
+    get_volume_state
+    case "$1" in
+        "$icon_plus")
+            pct_num=$((pct_num + 5))
+            [[ $pct_num -gt 100 ]] && pct_num=100
+            amixer set Master ${pct_num}% >/dev/null
+            ;;
+        "$icon_minus")
+            pct_num=$((pct_num - 5))
+            [[ $pct_num -lt 0 ]] && pct_num=0
+            amixer set Master ${pct_num}% >/dev/null
+            ;;
+        "$icon_muted")
+            amixer set Master toggle >/dev/null
+            ;;
+        "$mic")
+            amixer set Capture toggle >/dev/null
+            ;;
+    esac
 }
 
 check_case() {
     case "$chosen" in
+        "$icon_plus")
+            handle_option "$icon_plus";;
+        "$icon_minus")
+            handle_option "$icon_minus";;
         "$icon_muted")
             handle_option "$icon_muted";;
         "$mic")
             handle_option "$mic";;
         "$icon")
-            notify-send -a "Volume" "Volume: 70%" -h 'int:value:70'
-            amixer set Master 70% >/dev/null;;
+            amixer set Master toggle >/dev/null;;
     esac
     main_menu
 }
