@@ -1,6 +1,6 @@
 # Rofi
 
-<img src="preview/screen.png" alt="Rofi Preview" width="100%">
+<img src="preview/screen.gif" alt="Rofi Preview" width="100%">
 
 <p><i>Nota: Esta es solo una imagen de referencia mostrando los widgets abiertos. En realidad pueden verse distinto principalmente por la posición, ya que no se pueden abrir todos al mismo tiempo.</i></p>
 
