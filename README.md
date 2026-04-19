@@ -3,7 +3,10 @@
 <div align="center">
   <p>Colección de scripts Rofi para launcher, menús y applets</p>
   
-  <video src="preview/rofi.webm" autoplay loop muted playsinline width="400"></video>
+  <a href="preview/rofi.webm">
+    <img src="preview/launcher.png" alt="Ver video" width="400">
+  </a>
+  <br><small>Click para ver video</small>
   
   <a href="https://github.com/ramz0/rofi/stargazers">
     <img src="https://img.shields.io/github/stars/ramz0/rofi?colorA=363a4f&colorB=b7bdf8&style=for-the-badge">
