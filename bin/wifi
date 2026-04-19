@@ -6,7 +6,7 @@
 ####### Rofi Wifi #######
 
 # Icons
-icon_header=$(printf '\uf0ac')     # fa-globe (header)
+icon_header=$(printf '')     # fa-globe (header)
 icon_wifi=$(printf '\uf1eb')       # fa-wifi (connect)
 icon_wifi_off=$(printf '\uf204')   # fa-toggle-off (disconnect)
 icon_scan=$(printf '\uf002')       # fa-search (scan)

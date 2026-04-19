@@ -7,9 +7,9 @@ TODAY=$(date '+%-d')
 CURRENT_MONTH=$(date '+%-m')
 CURRENT_YEAR=$(date '+%Y')
 
-prev=$(printf '\uf060')    # fa-arrow-left
-list=$(printf '\uf03a')    # fa-list
-next=$(printf '\uf061')    # fa-arrow-right
+prev=$(printf '')    # fa-arrow-left
+list=$(printf '')    # fa-list
+next=$(printf '')    # fa-arrow-right
 
 get_calendar() {
     if [ "$DIFF" -eq 0 ]; then
@@ -32,7 +32,7 @@ show_main() {
     chosen="$(echo -e "$options" | rofi \
         -theme "$ddir/calendar.rasi" \
         -dmenu \
-        -p "Calendar" \
+        -p "Calendario" \
         -mesg "$message" \
         -hover-select \
         -me-select-entry '' \
