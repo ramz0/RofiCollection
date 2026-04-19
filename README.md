@@ -1,8 +1,7 @@
-# Rofi - Catppuccin Theme
+# Rofi
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/logos/exports/1544x1544_circle.png" width="100" alt="Logo"/>
-  <p>Rofi launcher, menus and applets with Catppuccin Mocha theme</p>
+  <p>Colección de scripts Rofi para launcher, menús y applets</p>
   
   <a href="https://github.com/ramz0/rofi/stargazers">
     <img src="https://img.shields.io/github/stars/ramz0/rofi?colorA=363a4f&colorB=b7bdf8&style=for-the-badge">
@@ -16,38 +15,62 @@
 
 ## Showcase
 
-| Launcher | Runner |
-|----------|--------|
-| ![Launcher](preview/launcher.png) | ![Runner](preview/runner.png) |
+<details>
+<summary><b>Launcher</b></summary>
 
-| Powermenu | Screenshot |
-|-----------|------------|
-| ![Powermenu](preview/powermenu.png) | ![Screenshot](preview/screenshot.png) |
+![Launcher](preview/launcher.png)
+</details>
 
-| Wifi | Calendar |
-|------|-----------|
-| ![Wifi](preview/wifi.png) | ![Calendar](preview/calendar.png) |
+<details>
+<summary><b>Runner</b></summary>
+
+![Runner](preview/runner.png)
+</details>
+
+<details>
+<summary><b>Powermenu</b></summary>
+
+![Powermenu](preview/powermenu.png)
+</details>
+
+<details>
+<summary><b>Screenshot</b></summary>
+
+![Screenshot](preview/screenshot.png)
+</details>
+
+<details>
+<summary><b>Wifi</b></summary>
+
+![Wifi](preview/wifi.png)
+</details>
+
+<details>
+<summary><b>Calendar</b></summary>
+
+![Calendar](preview/calendar.png)
+</details>
 
 ---
 
 ## Requisitos
 
-### Dependencias necesarias
+### Dependencias
 
 ```sh
 # Arch / Arch-based
-sudo pacman -S rofi playerctl brightnessctl maim xclip xdotool networkmanager nmcli
+sudo pacman -S rofi playerctl brightnessctl maim xclip xdotool networkmanager nmcli pamixer dunst
 
 # Debian / Ubuntu
-sudo apt install rofi playerctl brightnessctl maim xclip xdotool network-manager
+sudo apt install rofi playerctl brightnessctl maim xclip xdotool network-manager pamixer dunst
 
 # Fedora
-sudo dnf install rofi playerctl brightnessctl maim xclip xdotool NetworkManager
+sudo dnf install rofi playerctl brightnessctl maim xclip xdotool NetworkManager pamixer dunst
 ```
 
-### Fuentes requeridas
+### Fuentes
 
-- **Nerd Fonts** (obligatorio para los iconos)
+- **Nerd Fonts** (obligatorio para iconos)
   
   ```sh
   # Arch
@@ -56,25 +79,15 @@ sudo dnf install rofi playerctl brightnessctl maim xclip xdotool NetworkManager
   # Debian/Ubuntu
   sudo apt install fonts-jetbrains-mono fonts-firacode
 
-  # O descarga manualmente: https://www.nerdfonts.com/font-downloads
+  # Manual: https://www.nerdfonts.com/font-downloads
   ```
-
-### Otros
-
-- **bspwm** (para algunos atajos)
-- **dunst** (para notificaciones)
-- **amixer** / **pamixer** (para control de volumen)
 
 ---
 
 ## Instalación
 
 ```sh
-# Clonar el repositorio
 git clone https://github.com/ramz0/rofi.git ~/.config/rofi
-
-# Asegurate de tener las dependencias instaladas
-# Ver sección de requisitos
 ```
 
 ---
@@ -83,128 +96,58 @@ git clone https://github.com/ramz0/rofi.git ~/.config/rofi
 
 ```
 rofi/
-├── bin/                    # Scripts ejecutables
-│   ├── launcher           # Lanzador de aplicaciones
+├── bin/
+│   ├── launcher           # Lanzador de apps
 │   ├── runner             # Ejecutar comandos
 │   ├── powermenu          # Apagar/reiniciar/bloquear
-│   ├── screenshot         # Capturas de pantalla
-│   ├── calendar           # Calendario con tareas
-│   ├── wifi               # Gestión de WiFi
-│   ├── volume             # Control de volumen
-│   └── volume-bar         # Popup de volumen
+│   ├── screenshot         # Capturas
+│   ├── calendar           # Calendario
+│   ├── wifi               # Wifi
+│   ├── volume             # Volumen
+│   └── volume-bar         # Popup volumen
 ├── config/                 # Archivos .rasi
 ├── icons/                  # Iconos
 ├── themes/                 # Temas
-└── preview/               # Capturas de pantalla
+└── preview/               # Capturas
 ```
-
----
-
-## Atajos de teclado
-
-| Atajo | Acción |
-|-------|--------|
-| `Super + D` | Launcher (lanzador) |
-| `Super + R` | Runner (ejecutar comandos) |
-| `Super + P` | Powermenu |
-| `Super + S` | Screenshot |
-| `Super + Shift + N` | Wifi |
-| `Super + D` | Calendar |
-| `Super + V` | Volume |
-
-### En Qtile
-
-Los atajos están configurados en `~/.config/qtile/shortcuts/keys_rofi.py` y `keys_media.py`.
 
 ---
 
 ## Uso
 
-### Launcher (lanzador de apps)
+| Script | Descripción |
+|--------|-------------|
+| [`bin/launcher`](bin/launcher) | Launcher de aplicaciones |
+| [`bin/runner`](bin/runner) | Ejecutar comandos |
+| [`bin/powermenu`](bin/powermenu) | Apagar/reiniciar/suspender/lock |
+| [`bin/screenshot`](bin/screenshot) | Capturas de pantalla |
+| [`bin/wifi`](bin/wifi) | Gestión WiFi |
+| [`bin/calendar`](bin/calendar) | Calendario con tareas |
 
+Ejecutar directamente:
 ```sh
-rofi -show drun -theme ~/.config/rofi/config/launcher.rasi
-# o
 ~/.config/rofi/bin/launcher
-```
-
-### Runner (ejecutar comandos)
-
-```sh
-rofi -show run -theme ~/.config/rofi/config/runner.rasi
-# o
-~/.config/rofi/bin/runner
-```
-
-### Powermenu
-
-```sh
 ~/.config/rofi/bin/powermenu
-```
-
-### Screenshot
-
-```sh
-~/.config/rofi/bin/screenshot
-```
-
-### Wifi
-
-```sh
-~/.config/rofi/bin/wifi
-```
-
-### Calendar
-
-```sh
-~/.config/rofi/bin/calendar
-```
-
-### Volume
-
-```sh
-~/.config/rofi/bin/volume
+# etc...
 ```
 
 ---
 
-## Temas disponibles
+## Atajos de teclado (Qtile)
 
-- `catppuccin-mocha` (defecto)
-- `catppuccin-latte`
-
-Para cambiar el tema, editá `config.rasi` y cambiá la línea que carga el tema.
-
----
-
-## Personalización
-
-### Cambiar tema de color
-
-Editá el archivo `themes/catppuccin-mocha.rasi` para ajustar colores.
-
-### Agregar más items al launcher
-
-Rofi usa `drun` que automaticamente detecta tus aplicaciones instaladas.
+Los scripts pueden ejecutarse desde Qtile. Más detalles en [`~/.config/qtile/shortcuts/`](https://github.com/ramz0/dotfiles/tree/main/qtile/shortcuts).
 
 ---
 
 ## Notas
 
-- Los iconos usan Nerd Fonts (codepoint Nerd Font). Asegurate de tener una instalada.
-- Algunos scripts requieren `nmcli` para wifi y `amixer`/`pamixer` para volumen.
-- El calendario busca tareas en `~/.local/share/rofi-calendar-tasks`.
-
----
-
-## Inspiración
-
-- [Deathemonic](https://github.com/Deathemonic)
-- [adi1090x/rofi](https://github.com/adi1090x/rofi)
-- [Catppuccin](https://github.com/catppuccin/catppuccin)
+- Iconos: Nerd Fonts (codepoint `\uf...`)
+- Wifi: requiere `nmcli`
+- Volumen: usa `pamixer`
+- Calendario: lee `~/.local/share/rofi-calendar-tasks`
 
 ---
 
 <div align="center">
-  <p>Hecho con ❤️</p>
+  <p>Basado en el trabajo de <a href="https://github.com/mdfk15/Rofi">mdfk15/Rofi</a></p>
 </div>
