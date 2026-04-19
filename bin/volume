@@ -1,9 +1,3 @@
-#!/usr/bin/env bash
-#
-## Author   : mdfk@Elite <2022>
-## Github   : @mdfk15
-#
-####### Rofi Volume #######
 
 path=$(dirname "$0")
 source $path/base.sh
@@ -21,22 +15,22 @@ options() {
     urgent=''
 
     if [[ "$muted" == "true" ]]; then
-        icon='\uf6a9'
+        icon=''
         [ -n "$urgent" ] && urgent+=",0" || urgent="-u 0"
     else
         if [[ $percentage -le 30 ]]; then
-            icon='\uf027'
+            icon=''
         elif [[ $percentage -lt 70 ]]; then
-            icon='\uf028'
+            icon=''
         else
-            icon='\uf029'
+            icon=''
         fi
     fi
 
     if [[ "$mic_muted" == "true" ]]; then
-        mic='\uf131'
+        mic=''
     else
-        mic='\uf130'
+        mic=''
         [ -n "$active" ] && active+=",1" || active="-a 1"
     fi
 
