@@ -132,7 +132,7 @@ Ejecutar directamente:
 
 ## Atajos de teclado (Qtile)
 
-Los scripts pueden ejecutarse desde Qtile. Más detalles en [`~/.config/qtile/shortcuts/`](https://github.com/ramz0/dotfiles/tree/main/qtile/shortcuts).
+Los scripts pueden ejecutarse desde Qtile. Más detalles y configuración completa en el repositorio público [qtile-ramz](https://github.com/ramz0/qtile-ramz), que incluye atajos, barra y escritorio de referencia.
 
 ---
 
