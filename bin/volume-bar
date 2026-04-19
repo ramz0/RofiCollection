@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+action="$1"
+case "$action" in
+    up)
+        pamixer --increase 2
+        ;;
+    down)
+        pamixer --decrease 2
+        ;;
+    toggle)
+        pamixer --toggle-mute
+        ;;
+esac
+
+percentage=$(pamixer --get-volume)
+muted=$(pamixer --get-mute)
+
+if [[ "$muted" == "true" ]]; then
+    bar="[MUTED]"
+    icon="🔇"
+else
+    filled=$((percentage / 5))
+    empty=$((20 - filled))
+    bar=$(printf '%*s' "$filled" | tr ' ' '█')
+    bar+=$(printf '%*s' "$empty" | tr ' ' '░')
+    bar="[$bar] ${percentage}%"
+    icon="🔊"
+fi
+
+rofi -e "$icon $bar" -theme-str '
+    window {location: center; width: 300px;}
+    textbox {horizontal-align: 0.5; font: "JetBrainsMono Nerd Font 14";}
+' -timeout 1 -no-actions -show ></dev/null 2>&1
