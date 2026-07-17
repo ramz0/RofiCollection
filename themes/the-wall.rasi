@@ -83,7 +83,6 @@ element-text {
     text-color:       inherit;
     vertical-align:   0.5;
     horizontal-align: 0;
-    margin:           3px 0px 0px 0px;
 }
 
 element selected {

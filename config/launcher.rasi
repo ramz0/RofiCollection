@@ -85,6 +85,7 @@ element {
 element-icon {
     background-color: transparent;
     size:             24px;
+    vertical-align:   0.5;
 }
 
 element-text {
@@ -93,14 +94,11 @@ element-text {
     expand:           true;
     horizontal-align: 0;
     vertical-align:   0.5;
-    margin:           5px 0px 0px 0px;
 }
 
 element selected {
-    background-color: #FF0000ff;
-    text-color:       #FFFF00ff;
-    border:           4px;
-    border-color:     #00FF00ff;
+    background-color: @BGA;
+    text-color:       @BG;
     border-radius:    10px;
 }
 
