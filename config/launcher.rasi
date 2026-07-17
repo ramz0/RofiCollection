@@ -1,149 +1,111 @@
 configuration {
-    show-icons:                     true;
-    display-drun: 		            "";
-    drun-display-format:            "{icon} {name}";
-    disable-history:                false;
-    click-to-exit: 		            true;
-    location:                       0;
+    show-icons:          true;
+    drun-display-format: "{name}";
+    disable-history:     false;
+    click-to-exit:       true;
+    sidebar-mode:        false;
 }
 
 @import "font.rasi"
 @import "colors.rasi"
 
+* {
+    BG:  #0C1826dd;
+    FG:  @wall-text;
+    BGA: #B8D4ECff;
+    BDR: #E4EEF8ff;
+}
+
 window {
-    transparency:                   "real";
-    background-color:               @BG;
-    text-color:                     @FG;
-    border:                         2px;
-    border-color:                   @BDR;
-    border-radius:                  10px;
-    width:                          500px;
-    anchor:                         center;
-    x-offset:                       0;
-    y-offset:                       0;
-}
-
-prompt {
-    enabled: 			            true;
-    padding: 			            8px;
-    background-color: 		        @BG;
-    text-color: 		            @IMG;
-}
-
-textbox-prompt-colon {
-    expand: 			            false;
-    str: 			                "";
-    border-radius:                  100%;
-    background-color:               @SEL;
-    text-color:                     @FG;
-    padding:                        8px 12px 8px 12px;
-    font:			                "Iosevka Nerd Font 10";
-}
-
-entry {
-    background-color:               @BG;
-    text-color:                     @FG;
-    placeholder-color:              @FG;
-    expand:                         true;
-    horizontal-align:               0;
-    placeholder:                    "Search...";
-    blink:                          true;
-    border:                  	    0px 0px 2px 0px;
-    border-color:                   @BDR;
-    border-radius:                  10px;
-    padding:                        8px;
-}
-
-inputbar {
- 	children: 		                [ textbox-prompt-colon, prompt, entry ];
-    background-color:               @BG;
-    text-color:                     @FG;
-    expand:                         false;
-    border:                  	    0px 0px 0px 0px;
-    border-radius:                  0px;
-    border-color:                   @BDR;
-    margin:                         0px 0px 0px 0px;
-    padding:                        0px;
-    position:                       center;
-}
-
-case-indicator {
-    background-color:               @BG;
-    text-color:                     @FG;
-    spacing:                        0;
-}
-
-
-listview {
-    background-color:               @BG;
-    columns:                        1;
-    lines:			                7;
-    spacing:                        4px;
-    cycle:                          false;
-    dynamic:                        true;
-    layout:                         vertical;
+    transparency:     "real";
+    background-color: @BG;
+    text-color:       @FG;
+    border:           2px;
+    border-color:     @BDR;
+    border-radius:    10px;
+    width:            500px;
+    anchor:           center;
 }
 
 mainbox {
-    background-color:               @BG;
-    children:                       [ inputbar, listview ];
-    spacing:                        15px;
-    padding:                        15px;
+    background-color: transparent;
+    children:         [ inputbar, listview ];
+    spacing:          15px;
+    padding:          15px;
+}
+
+/*****----- Barra de búsqueda -----*****/
+inputbar {
+    children:         [ textbox-prompt-colon, entry ];
+    background-color: transparent;
+}
+
+textbox-prompt-colon {
+    expand:           false;
+    str:              "";
+    border-radius:    100%;
+    background-color: #0C1826ff;
+    text-color:       @FG;
+    padding:          8px 12px;
+    font:             "CaskaydiaCove Nerd Font 10";
+}
+
+entry {
+    background-color: transparent;
+    text-color:       @FG;
+    placeholder-color: @FG;
+    expand:           true;
+    placeholder:      "Search...";
+    blink:            true;
+    border:           0px 0px 2px 0px;
+    border-color:     @BDR;
+    border-radius:    10px;
+    padding:          8px;
+}
+
+/*****----- Lista de apps -----*****/
+listview {
+    background-color: transparent;
+    columns:          1;
+    lines:            7;
+    spacing:          4px;
+    cycle:            false;
+    dynamic:          true;
 }
 
 element {
-    background-color:               @BG;
-    text-color:                     @FG;
-    orientation:                    horizontal;
-    border-radius:                  4px;
-    padding:                        6px 6px 6px 6px;
+    background-color: transparent;
+    text-color:       @FG;
+    orientation:      horizontal;
+    border-radius:    10px;
+    padding:          6px 8px;
+    spacing:          4px;
 }
 
 element-icon {
-    background-color: 	            inherit;
-    text-color:       		        inherit;
-    horizontal-align:               0.5;
-    vertical-align:                 0.5;
-    size:                           24px;
-    border:                         0px;
+    background-color: transparent;
+    size:             24px;
 }
 
 element-text {
-    background-color: 		        inherit;
-    text-color:       		        inherit;
-    expand:                         true;
-    horizontal-align:               0;
-    vertical-align:                 0.5;
-    margin:                         2px 0px 2px 2px;
+    background-color: transparent;
+    text-color:       inherit;
+    expand:           true;
+    horizontal-align: 0;
+    vertical-align:   0.5;
+    margin:           5px 0px 0px 0px;
 }
 
-element normal.urgent,
-element alternate.urgent {
-    background-color:               @UGT;
-    text-color:                     @FG;
-    border-radius:                  9px;
+element selected {
+    background-color: #FF0000ff;
+    text-color:       #FFFF00ff;
+    border:           4px;
+    border-color:     #00FF00ff;
+    border-radius:    10px;
 }
 
 element normal.active,
 element alternate.active {
-    background-color:               @BGA;
-    text-color:                     @FG;
-}
-
-element selected {
-    background-color:               @BGA;
-    text-color:                     @SEL;
-    border:                  	    0px 0px 0px 0px;
-    border-radius:                  10px;
-    border-color:                   @BDR;
-}
-
-element selected.urgent {
-    background-color:               @UGT;
-    text-color:                     @FG;
-}
-
-element selected.active {
-    background-color:               @BGA;
-    color:                          @FG;
+    background-color: @BGA;
+    text-color:       @FG;
 }

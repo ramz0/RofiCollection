@@ -9,6 +9,18 @@ configuration {
 @import "font.rasi"
 @import "colors.rasi"
 
+/*****----- Override: runner -----*****/
+/* Los defaults de colors.rasi ya configuran el tema oscuro.
+   Solo se listan aquí los valores clave para que sean fáciles de ajustar. */
+* {
+    BG:  @surface1;
+    FG:  @wall-text;
+    BGA: @ice;
+    SEL: @base;
+    IMG: @snow;
+    BDR: @frost;
+}
+
 window {
     transparency:                   "real";
     background-color:               @BG;

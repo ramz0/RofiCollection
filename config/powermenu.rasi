@@ -7,13 +7,15 @@ configuration {
     fixed-num-lines:    true;
 }
 
-/*****----- Colors -----*****/
+@import "colors.rasi"
+
+/*****----- The Wall — Powermenu (light) -----*****/
 * {
-    background:     #1e2030;
-    background-alt: #181926;
-    foreground:     #cad3f5;
-    selected:       #eed49f;
-    border-col:     #363a4f;
+    background:     @snow;
+    background-alt: @ice;
+    foreground:     @slate;
+    selected:       @slate;
+    border-col:     @frost;
 }
 
 /*****----- Main Window -----*****/

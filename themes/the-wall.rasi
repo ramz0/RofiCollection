@@ -1,0 +1,125 @@
+/*****----- The Wall Theme -----*****/
+@import "../config/colors.rasi"
+
+* {
+    width: 600;
+    font:  "CaskaydiaCove Nerd Font 14";
+
+    /* Dark glass overrides */
+    bg-col:       #0C1826dd;
+    bg-col-light: @overlay0;
+    border-col:   @snow;
+    selected-col: @ice;
+    blue:         @snow;
+    fg-col2:      @base;
+}
+
+element-text, element-icon, mode-switcher {
+    background-color: transparent;
+    text-color:       inherit;
+}
+
+window {
+    height:           360px;
+    border:           2px;
+    border-color:     @border-col;
+    border-radius:    10px;
+    background-color: @bg-col;
+}
+
+mainbox {
+    background-color: transparent;
+}
+
+inputbar {
+    children:         [prompt, entry];
+    background-color: transparent;
+    border-radius:    5px;
+    padding:          2px;
+}
+
+prompt {
+    background-color: @blue;
+    padding:          6px;
+    text-color:       @fg-col2;
+    border-radius:    3px;
+    margin:           20px 20px 0px 20px;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    str:    ":";
+}
+
+entry {
+    padding:          6px;
+    margin:           20px 20px 0px 10px;
+    text-color:       @fg-col;
+    background-color: transparent;
+}
+
+listview {
+    border:           0px 0px 0px;
+    padding:          6px 0px 0px;
+    margin:           10px 20px 0px 20px;
+    columns:          2;
+    lines:            5;
+    background-color: transparent;
+}
+
+element {
+    padding:          5px;
+    background-color: transparent;
+    text-color:       @fg-col;
+}
+
+element-icon {
+    size:           25px;
+    vertical-align: 0.5;
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+    vertical-align:   0.5;
+    horizontal-align: 0;
+    margin:           3px 0px 0px 0px;
+}
+
+element selected {
+    background-color: @selected-col;
+    text-color:       @fg-col2;
+    border-radius:    8px;
+}
+
+mode-switcher {
+    spacing: 0;
+}
+
+button {
+    padding:          10px;
+    background-color: transparent;
+    text-color:       @wall-dim;
+    vertical-align:   0.5;
+    horizontal-align: 0.5;
+}
+
+button selected {
+    background-color: @ice;
+    text-color:       @base;
+    border-radius:    6px;
+}
+
+message {
+    background-color: @bg-col-light;
+    margin:           2px;
+    padding:          2px;
+    border-radius:    5px;
+}
+
+textbox {
+    padding:          6px;
+    margin:           20px 20px 0px 20px;
+    text-color:       @blue;
+    background-color: @bg-col-light;
+}

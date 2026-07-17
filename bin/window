@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+rofi \
+    -show window \
+    -kb-accept-entry "Return,!alt-Release" \
+    -kb-row-down "Tab,Down,alt-Tab" \
+    -kb-row-up "shift-Tab,Up,alt-shift-Tab"

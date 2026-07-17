@@ -1,0 +1,5 @@
+code ~/.config/qtile
+code ~/.config/rofi
+systemctl reboot
+systemctl poweroff
+wezterm start -- zsh -c 'cmatrix; zsh'

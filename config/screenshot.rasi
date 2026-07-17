@@ -7,13 +7,15 @@ configuration {
     fixed-num-lines:    true;
 }
 
-/*****----- Colors (Tokyo Night Storm) -----*****/
+@import "colors.rasi"
+
+/*****----- The Wall — Screenshot (light) -----*****/
 * {
-    background:     #24283b;
-    background-alt: #292e42;
-    foreground:     #a9b1d6;
-    selected:       #7aa2f7;
-    border-col:     #414868;
+    background:     @snow;
+    background-alt: @ice;
+    foreground:     @slate;
+    selected:       @slate;
+    border-col:     @frost;
 }
 
 /*****----- Main Window -----*****/

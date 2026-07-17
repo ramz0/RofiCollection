@@ -7,14 +7,16 @@ configuration {
     fixed-num-lines:    false;
 }
 
-/*****----- Colors (Tokyo Night Storm) -----*****/
+@import "colors.rasi"
+
+/*****----- The Wall — Calendar (light) -----*****/
 * {
-    background:     #24283b;
-    background-alt: #292e42;
-    foreground:     #a9b1d6;
-    foreground-dim: #565f89;
-    selected:       #bb9af7;
-    border-col:     #414868;
+    background:     @snow;
+    background-alt: @ice;
+    foreground:     @slate;
+    foreground-dim: @steel;
+    selected:       @slate;
+    border-col:     @frost;
 }
 
 /*****----- Main Window -----*****/

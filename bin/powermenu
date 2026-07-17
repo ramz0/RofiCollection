@@ -11,9 +11,16 @@ suspend=$(printf '\uf186')     # fa-moon-o
 logout=$(printf '\uf08b')      # fa-sign-out
 
 rdialog() {
-	rofi -dmenu -i -no-fixed-num-lines \
-		-p "¿Seguro? (s/n): " \
-		-theme "$ddir/confirm.rasi"
+	local label="$1"
+	local yes no chosen
+	yes=$(printf '  Sí')
+	no=$(printf '  No')
+	chosen=$(printf "%s\n%s" "$yes" "$no" | rofi -dmenu \
+		-p "$label" \
+		-mesg "¿Estás seguro de que quieres continuar?" \
+		-selected-row 0 \
+		-theme "$ddir/confirm.rasi")
+	[[ "$chosen" == "$yes" ]]
 }
 
 options="$lock\n$suspend\n$logout\n$reboot\n$shutdown"
@@ -29,19 +36,16 @@ chosen="$(echo -e "$options" | rofi \
 
 case $chosen in
 	$shutdown)
-		ans=$(rdialog)
-		[[ $ans == "s" || $ans == "si" || $ans == "y" || $ans == "yes" ]] && systemctl poweroff
+		rdialog "Apagar" && systemctl poweroff
 		;;
 	$reboot)
-		ans=$(rdialog)
-		[[ $ans == "s" || $ans == "si" || $ans == "y" || $ans == "yes" ]] && systemctl reboot
+		rdialog "Reiniciar" && systemctl reboot
 		;;
 	$lock)
 		sh "$HOME/.local/bin/lock"
 		;;
 	$suspend)
-		ans=$(rdialog)
-		if [[ $ans == "s" || $ans == "si" || $ans == "y" || $ans == "yes" ]]; then
+		if rdialog "Suspender"; then
 			mpc -q pause 2>/dev/null
 			amixer set Master mute 2>/dev/null
 			sh "$HOME/.local/bin/lock"
@@ -49,7 +53,6 @@ case $chosen in
 		fi
 		;;
 	$logout)
-		ans=$(rdialog)
-		[[ $ans == "s" || $ans == "si" || $ans == "y" || $ans == "yes" ]] && bspc quit
+		rdialog "Cerrar sesión" && bspc quit
 		;;
 esac

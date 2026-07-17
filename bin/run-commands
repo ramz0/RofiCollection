@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+commands_file="$(dirname "$0")/commands"
+
+confirm_add() {
+    local yes="  Sí"
+    local no="  No"
+    local chosen
+    chosen=$(printf "%s\n%s" "$yes" "$no" | rofi -dmenu \
+        -p "Agregar comando" \
+        -mesg "$1" \
+        -selected-row 0 \
+        -theme "$HOME/.config/rofi/config/confirm.rasi")
+    [[ "$chosen" == "$yes" ]]
+}
+
+if [[ -n "$1" ]]; then
+    if [[ "$1" == "  Editar lista..." ]]; then
+        setsid wezterm start -- nano "$commands_file" &
+    elif grep -qxF "$1" "$commands_file"; then
+        setsid bash -c "$1" &
+    else
+        confirm_add "$1" && printf '%s\n' "$1" >> "$commands_file"
+    fi
+else
+    printf "\x00no-custom\x1ffalse\n"
+    cat "$commands_file"
+    echo "  Editar lista..."
+fi

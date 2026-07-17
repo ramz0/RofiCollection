@@ -1,12 +1,50 @@
+/*****----- The Wall Palette -----*****/
 * {
-    BG:    #1E1D2Fff;
-    BGA:   #89DCEBff;
-    FG:    #D9E0EEff;
-    FGA:   #F28FADff;
-    BDR:   #96CDFBff;
-    SEL:   #1E1E2Eff;
-    UGT:   #F28FADff;
-    IMG:   #FAE3B0ff;
-    OFF:   #575268ff;
-    ON:    #ABE9B3ff;
+    /* Escala de azules fríos — de más claro a más oscuro */
+    snow:     #E4EEF8ff;
+    ice:      #B8D4ECff;
+    frost:    #8AB8D4ff;
+    mist:     #5C8AAEff;
+    steel:    #3A6282ff;
+    slate:    #263C58ff;
+
+    /* Texto */
+    wall-text:    #DCE8F4ff;
+    wall-subtext: #B0C8DCff;
+    wall-dim:     #84A8C0ff;
+
+    /* Capas de superficie */
+    surface2: #263C58ff;
+    surface1: #1C2E44ff;
+    surface0: #142238ff;
+    base:     #0C1826ff;
+    overlay0: #305070ff;
+
+    /* Variantes semitransparentes */
+    snow-t:   #E4EEF8cc;
+    snow-dim: #E4EEF866;
+    ice-t:    #B8D4ECcc;
+    slate-t:  #263C5855;
+
+    /*****----- Semántica: tema oscuro (launcher / runner) -----*****/
+    BG:  @surface1;
+    BGA: @ice;
+    FG:  @wall-text;
+    FGA: @frost;
+    BDR: @frost;
+    SEL: @base;
+    UGT: @mist;
+    IMG: @snow;
+    OFF: @frost;
+    ON:  @steel;
+
+    /*****----- Aliases para the-wall.rasi -----*****/
+    bg-col:       @surface1;
+    bg-col-light: @surface0;
+    border-col:   @frost;
+    selected-col: @ice;
+    blue:         @snow;
+    fg-col:       @wall-text;
+    fg-col2:      @base;
+    grey:         @frost;
 }

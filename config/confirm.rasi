@@ -1,24 +1,98 @@
 @import "colors.rasi"
-@import "font.rasi"
+
+/*****----- The Wall — Confirm modal -----*****/
+configuration {
+    show-icons:      false;
+    fixed-num-lines: true;
+}
 
 * {
-    background-color:       @BG;
-    text-color:             @FG;
+    background:  @snow;
+    foreground:  @slate;
 }
 
 window {
-    width:      	        200px;
-    padding:                20px;
-    border:		            0px 0px 2px 0px;
-    border-radius:          8px;
-    border-color:           @BDR;
-    location:               0;
-    x-offset:               0;
-    y-offset:               -4%;
+    location:           0;
+    width:              400px;
+    padding:            0px;
+    border:             1px solid;
+    border-radius:      18px;
+    border-color:       @frost;
+    background-color:   @snow;
+    cursor:             "default";
 }
 
-entry {
-    expand: 		        true;
-    width: 		            150px;
-    text-color:		        @BDR;
+mainbox {
+    spacing:          0px;
+    padding:          0px;
+    background-color: transparent;
+    children:         [ "inputbar", "message", "listview" ];
+}
+
+/*****----- Título (nombre de la acción) -----*****/
+inputbar {
+    children:         [ "prompt" ];
+    padding:          28px 28px 6px 28px;
+    background-color: transparent;
+}
+
+prompt {
+    font:             "CaskaydiaCove Nerd Font Bold 17";
+    background-color: transparent;
+    text-color:       @slate;
+    vertical-align:   0.5;
+    horizontal-align: 0.0;
+    expand:           true;
+}
+
+/*****----- Pregunta -----*****/
+message {
+    padding:          4px 28px 24px 28px;
+    background-color: transparent;
+}
+
+textbox {
+    font:             "CaskaydiaCove Nerd Font 11";
+    background-color: transparent;
+    text-color:       @steel;
+    horizontal-align: 0.0;
+}
+
+/*****----- Botones -----*****/
+listview {
+    spacing:          10px;
+    padding:          0px 20px 24px 20px;
+    columns:          2;
+    lines:            1;
+    scrollbar:        false;
+    fixed-height:     false;
+    background-color: transparent;
+}
+
+element {
+    padding:          13px 10px;
+    border-radius:    12px;
+    background-color: @ice;
+    text-color:       @slate;
+    cursor:           pointer;
+}
+
+element-text {
+    font:             "CaskaydiaCove Nerd Font 13";
+    background-color: transparent;
+    text-color:       inherit;
+    vertical-align:   0.5;
+    horizontal-align: 0.5;
+}
+
+element normal.normal,
+element alternate.normal {
+    background-color: @ice;
+    text-color:       @steel;
+}
+
+element selected.normal {
+    background-color: @slate;
+    text-color:       @snow;
+    border-radius:    12px;
 }

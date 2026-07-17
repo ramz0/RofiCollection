@@ -1,5 +1,5 @@
 configuration{
-    modi: "run,drun,window";
+    modi: "cmds:/home/ramz/.config/rofi/bin/run-commands,drun,window";
     icon-theme: "Oranchelo";
     show-icons: true;
     terminal: "wezterm";
@@ -7,11 +7,13 @@ configuration{
     location: 0;
     disable-history: false;
     hide-scrollbar: true;
-    display-drun: "   Apps ";
-    display-run: "   Run ";
-    display-window: " 󱂬  Window";
+    display-drun: "  Apps";
+    display-cmds: "󱡁  Run";
+    display-window: "  Window";
     display-Network: " 󰤨  Network";
     sidebar-mode: true;
+    window-format: "{c}";
+    window-thumbnail: true;
 }
 
-@theme "catppuccin-mocha"
+@theme "the-wall"
